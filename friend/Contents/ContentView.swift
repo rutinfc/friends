@@ -15,10 +15,13 @@ struct Page2: View {
 
 struct ContentView: View {
     
+    let handler = ListHandler()
+    
     var body: some View {
         
         TabView {
             HomeMainView()
+                .environmentObject(self.handler)
                 .tabItem{
                     Image(systemName: "house")
                     Text("Home")
@@ -35,9 +38,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            ContentView().onOutline()
-            ContentView()
-        }
+        ContentView()
     }
 }

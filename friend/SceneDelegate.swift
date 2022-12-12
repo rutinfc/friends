@@ -19,9 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, ObservableObject {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
-//        let contentView = FriendApp()
         let contentView = ContentView()
-        print("<--- LOAD SCENE??")
         
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
