@@ -13,23 +13,8 @@ struct FriendUIApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView2()
+            View1()
         }
     }
 }
 #endif
-
-struct ContentView2: View {
-
-  var body: some View {
-      VStack {
-          Text("RUN2????")
-      }.background(Color.red)
-  }
-}
-
-struct ContentView2_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView2()
-    }
-}

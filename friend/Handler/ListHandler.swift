@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-struct ItemModel: Identifiable, Equatable {
+struct ItemModel: Identifiable, Equatable, Hashable {
     
     var id: String
     var date: Date

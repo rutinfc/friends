@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3535B4EA294856BF0020CA15 /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535B4E9294856BF0020CA15 /* UIKitExtension.swift */; };
+		3535B4EB294856BF0020CA15 /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535B4E9294856BF0020CA15 /* UIKitExtension.swift */; };
 		35782FB9294071A1006986A6 /* FriendUI.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35782FB72940719D006986A6 /* FriendUI.plist */; };
+		35A401AC2949C33600082CD6 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A401AB2949C33600082CD6 /* SwiftUIExtension.swift */; };
+		35A401AD2949C33600082CD6 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A401AB2949C33600082CD6 /* SwiftUIExtension.swift */; };
+		35A7DAFE29471BFF001DB392 /* NavigationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A7DAFD29471BFF001DB392 /* NavigationTest.swift */; };
 		8161B2262942F96900D30C62 /* HomeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161B2252942F96900D30C62 /* HomeItemView.swift */; };
 		8182E92B29386B4A000C8D18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8182E92A29386B4A000C8D18 /* AppDelegate.swift */; };
 		8182E92D29386B4A000C8D18 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8182E92C29386B4A000C8D18 /* SceneDelegate.swift */; };
@@ -22,7 +27,6 @@
 		81DDEEBC293F1F560059278E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8182E93529386B4A000C8D18 /* LaunchScreen.storyboard */; };
 		81DDEEBD293F1F560059278E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8182E93329386B4A000C8D18 /* Assets.xcassets */; };
 		81DDEEC6293F24200059278E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DDEEC5293F24200059278E /* ContentView.swift */; };
-		81DDEEC8293F2D090059278E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DDEEC5293F24200059278E /* ContentView.swift */; };
 		81DDEECA293F3C9D0059278E /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DDEEC9293F3C9D0059278E /* ViewExtension.swift */; };
 		81DDEECC293F3E580059278E /* HomeMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DDEECB293F3E580059278E /* HomeMainView.swift */; };
 		81DDEECF293F40C60059278E /* ListHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DDEECE293F40C60059278E /* ListHandler.swift */; };
@@ -69,7 +73,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		35782FB72940719D006986A6 /* FriendUI.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = FriendUI.plist; sourceTree = SOURCE_ROOT; };
+		3535B4E9294856BF0020CA15 /* UIKitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtension.swift; sourceTree = "<group>"; };
+		35782FB72940719D006986A6 /* FriendUI.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = FriendUI.plist; path = friend/FriendUI.plist; sourceTree = SOURCE_ROOT; };
+		35A401AB2949C33600082CD6 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
+		35A7DAFD29471BFF001DB392 /* NavigationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTest.swift; sourceTree = "<group>"; };
 		8161B2252942F96900D30C62 /* HomeItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeItemView.swift; sourceTree = "<group>"; };
 		8182E92729386B4A000C8D18 /* Friend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Friend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8182E92A29386B4A000C8D18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +131,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3535B4E8294856AF0020CA15 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3535B4E9294856BF0020CA15 /* UIKitExtension.swift */,
+				35A401AB2949C33600082CD6 /* SwiftUIExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		8182E91E29386B4A000C8D18 = {
 			isa = PBXGroup;
 			children = (
@@ -149,13 +165,14 @@
 		8182E92929386B4A000C8D18 /* friend */ = {
 			isa = PBXGroup;
 			children = (
+				3535B4E8294856AF0020CA15 /* Extension */,
 				81DDEECD293F40B20059278E /* Handler */,
 				81DDEEC7293F29DA0059278E /* Contents */,
 				8182E92A29386B4A000C8D18 /* AppDelegate.swift */,
 				8182E92C29386B4A000C8D18 /* SceneDelegate.swift */,
 				8182E92E29386B4A000C8D18 /* ViewController.swift */,
-				8182E93029386B4A000C8D18 /* Main.storyboard */,
 				81DDEEB2293F125D0059278E /* AppUI.swift */,
+				8182E93029386B4A000C8D18 /* Main.storyboard */,
 				8182E93329386B4A000C8D18 /* Assets.xcassets */,
 				8182E93529386B4A000C8D18 /* LaunchScreen.storyboard */,
 				8182E93829386B4A000C8D18 /* Info.plist */,
@@ -195,6 +212,7 @@
 				81DDEEC9293F3C9D0059278E /* ViewExtension.swift */,
 				81DDEECB293F3E580059278E /* HomeMainView.swift */,
 				8161B2252942F96900D30C62 /* HomeItemView.swift */,
+				35A7DAFD29471BFF001DB392 /* NavigationTest.swift */,
 			);
 			path = Contents;
 			sourceTree = "<group>";
@@ -373,8 +391,10 @@
 				81DDEECC293F3E580059278E /* HomeMainView.swift in Sources */,
 				81DDEEC6293F24200059278E /* ContentView.swift in Sources */,
 				81DDEECF293F40C60059278E /* ListHandler.swift in Sources */,
+				35A401AC2949C33600082CD6 /* SwiftUIExtension.swift in Sources */,
 				8182E92B29386B4A000C8D18 /* AppDelegate.swift in Sources */,
 				8182E92D29386B4A000C8D18 /* SceneDelegate.swift in Sources */,
+				3535B4EA294856BF0020CA15 /* UIKitExtension.swift in Sources */,
 				81DDEECA293F3C9D0059278E /* ViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -400,7 +420,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81DDEEC8293F2D090059278E /* ContentView.swift in Sources */,
+				35A7DAFE29471BFF001DB392 /* NavigationTest.swift in Sources */,
+				35A401AD2949C33600082CD6 /* SwiftUIExtension.swift in Sources */,
+				3535B4EB294856BF0020CA15 /* UIKitExtension.swift in Sources */,
 				81DDEEB7293F1F560059278E /* AppUI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -704,11 +726,11 @@
 				FRAMEWORK_SEARCH_PATHS = "$(SYMROOT)";
 				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_FLATTEN_NIBS = NO;
-				INFOPLIST_FILE = "Friend copy-Info.plist";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_OUTPUT_FORMAT = binary;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -716,7 +738,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_SWIFT_FLAGS = "-D SwiftUIApp";
-				PRODUCT_BUNDLE_IDENTIFIER = com.rutinfc.friend;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rutinfc.friendUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -736,11 +758,11 @@
 				FRAMEWORK_SEARCH_PATHS = "$(SYMROOT)";
 				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_FLATTEN_NIBS = NO;
-				INFOPLIST_FILE = "Friend copy-Info.plist";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_OUTPUT_FORMAT = binary;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -748,7 +770,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_SWIFT_FLAGS = "-D SwiftUIApp";
-				PRODUCT_BUNDLE_IDENTIFIER = com.rutinfc.friend;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rutinfc.friendUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

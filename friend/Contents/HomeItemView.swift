@@ -10,33 +10,49 @@ import SwiftUI
 struct HomeItemView: View {
     
     var item: ItemModel
-        
+    @State var isPresented: Bool = false
+    
     var body: some View {
         
-        VStack(alignment: .leading, spacing: 10) {
-            
-            VStack(alignment: .leading, spacing: 10) {
-                Text("ID").font(.largeTitle)
-                Text(item.id).font(.headline)
+        HStack(alignment: .top) {
+            VStack(alignment: .leading, spacing: 20) {
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("ID").font(.largeTitle)
+                    Button {
+                        self.isPresented = true
+                    } label: {
+                        Text(item.id).multilineTextAlignment(.leading).font(.headline)
+                    }
+                }
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("DATE").font(.largeTitle)
+                    Text("\(item.date)").font(.headline)
+                }
+                
+                Spacer()
             }
-            
-            VStack(alignment: .leading, spacing: 10) {
-                Text("DATE").font(.largeTitle)
-                Text("\(item.date)").font(.headline)
-            }
-            
+            .padding(.leading, 10)
+            .padding(.trailing, 10)
             Spacer()
         }
-        .padding(.leading, 10)
-        .padding(.trailing, 10)
+        .navigationDestination(isPresented: $isPresented) {
+            Text(item.id).navigationTitle("ID")
+        }
+        .navigationTitle(!self.isPresented ? "Detail" : "")
+        .navigationBarTitleDisplayMode(.inline)
+        
     }
 }
 
 struct HomeItemView_Previews: PreviewProvider {
+    
     static var previews: some View {
         
         let item = ListHandler.createItem()
-        
-        HomeItemView(item: item)
+        NavigationStack {
+            HomeItemView(item: item)
+        }
     }
 }

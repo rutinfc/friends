@@ -43,79 +43,118 @@ struct PressedButton: View {
     }
 }
 
-struct HomeListView: View {
+struct HomeMainOldView: View {
     
     @EnvironmentObject var handler: ListHandler
-    @Binding var isActive: Bool
+    @State var isActive: Bool = false
     
     var body: some View {
-        VStack(alignment: .leading){
-            Text("List Count : \(handler.list.count)")
-            ScrollView {
-                LazyVStack(alignment: .leading) {
-                    ForEach(handler.list) { item in
-                        
-                        HStack {
+        NavigationView {
+            VStack(alignment: .leading){
+                Text("List Count : \(handler.list.count)")
+                ScrollView {
+                    LazyVStack(alignment: .leading) {
+                        ForEach(handler.list) { item in
                             
-                            let destination = HomeItemView(item:item)
-                                .navigationTitle("Detail")
-                            NavigationLink(destination: destination, isActive: $isActive) {
-                                VStack {
-                                    Text("\(item.id)")
-                                        .font(.headline)
-                                        .lineLimit(1)
-                                    Text("\(item.date)")
-                                        .font(.subheadline)
-                                        .lineLimit(1)
+                            HStack {
+                                let destination = HomeItemView(item:item)
+                                    .navigationTitle("Detail")
+                                NavigationLink(destination: destination, isActive: $isActive) {
+                                    VStack {
+                                        Text("\(item.id)")
+                                            .font(.headline)
+                                            .lineLimit(1)
+                                        Text("\(item.date)")
+                                            .font(.subheadline)
+                                            .lineLimit(1)
+                                    }
+
+                                }.padding(.trailing, 10)
+                                Spacer()
+                                PressedButton(normalImage: Image(systemName: "minus.circle"),
+                                              pressedImage: Image(systemName: "minus.circle.fill")) {
+                                    handler.delete(item: item)
                                 }
+                                              .frame(width: 40, height: 40)
 
-                            }.padding(.trailing, 10)
-                            Spacer()
-                            PressedButton(normalImage: Image(systemName: "minus.circle"),
-                                          pressedImage: Image(systemName: "minus.circle.fill")) {
-                                handler.delete(item: item)
-                            }
-                                          .frame(width: 40, height: 40)
-
-                        }.padding(.trailing, 16)
-                        
-                        Rectangle()
-                            .background(Color.gray)
-                            .frame(width:UIScreen.main.bounds.width, height:1)
+                            }.padding(.trailing, 16)
+                            
+                            Rectangle()
+                                .background(Color.gray)
+                                .frame(width:UIScreen.main.bounds.width, height:1)
+                        }
                     }
                 }
             }
+            .padding(.leading, 20)
+            .navigationBarTitle(!self.isActive ? "Home" : "", displayMode: .inline)
+            .toolbar {
+                Button {
+                    self.handler.addList()
+                } label: {
+                    Image(systemName: "plus")
+                }
+            }
         }
-        .padding(.leading, 20)
     }
 }
 
 struct HomeMainView: View {
     
     @EnvironmentObject var handler: ListHandler
-    @State var isActive: Bool = false
-    @State private var path: [Color] = []
+    @State private var isActive: Bool = false
+    @State var current = ItemModel(id: "", date: Date())
     
     var body: some View {
-//        NavigationView {
-//            HomeListView(isActive: $isActive)
-//                .navigationBarTitle(!self.isActive ? "Home" : "", displayMode: .inline)
-//                .toolbar {
-//                    Button {
-//                        self.handler.addList()
-//                    } label: {
-//                        Image(systemName: "plus")
-//                    }
-//                }
-//        }
         
-        NavigationStack(path: $path) {
-            List {
-                NavigationLink("Purple", value: Color.purple)
-                NavigationLink("Pink", value: Color.pink)
-                NavigationLink("Orange", value: Color.orange)
-            }.navigationDestination(for: Color.self) { color in
-                Text("\(String(describing: color)) | \(String(describing: self.path))")
+        NavigationStack {
+            VStack(alignment: .leading) {
+                Text("List Count : \(handler.list.count)")
+                
+                ScrollView {
+                    LazyVStack(alignment: .leading) {
+                        
+                        ForEach(handler.list) { item in
+                            
+                            HStack {
+                                Button {
+                                    self.current = item
+                                    self.isActive = true
+                                } label: {
+                                    VStack {
+                                        Text("\(item.id)")
+                                            .font(.headline)
+                                            .lineLimit(1)
+                                        Text("\(item.date)")
+                                            .font(.subheadline)
+                                            .lineLimit(1)
+                                    }
+                                }
+                                Spacer()
+                                PressedButton(normalImage: Image(systemName: "minus.circle"),
+                                              pressedImage: Image(systemName: "minus.circle.fill")) {
+                                    handler.delete(item: item)
+                                }
+                                              .frame(width: 40, height: 40)
+                            }
+                            
+                            Rectangle()
+                                .background(Color.gray)
+                                .frame(width:UIScreen.main.bounds.width, height:1)
+                        }
+                    }.padding(.trailing, 10)
+                }.navigationDestination(isPresented: $isActive) {
+                    HomeItemView(item:self.current)
+                }
+            }
+            .padding(.leading, 20)
+            .navigationBarTitle(!self.isActive ? "Home" : "", displayMode: .inline)
+            .toolbar {
+                Button {
+                    self.handler.addList()
+                } label: {
+                    Image(systemName: "plus")
+                }
             }
         }
     }
