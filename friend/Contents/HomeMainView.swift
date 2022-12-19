@@ -7,46 +7,15 @@
 
 import SwiftUI
 
-struct PressedButton: View {
-    
-    @State private var isPressed = false
-    
-    private var action: () -> Void
-    private var normalImage: Image
-    private var pressedImage: Image
-    
-    init(normalImage:Image, pressedImage: Image, action: @escaping () -> Void) {
-        self.action = action
-        self.normalImage = normalImage
-        self.pressedImage = pressedImage
-    }
-    
-    var body: some View {
-        
-        (self.isPressed ? self.pressedImage : self.normalImage)
-            .resizable()
-            .overlay(
-                GeometryReader { geometry in
-                    Button(action: action) {
-                        Text("")
-                            .frame(width: geometry.size.width, height: geometry.size.height)
-                            .contentShape(Rectangle())
-                    }
-                    .buttonStyle(.plain)
-                    .pressAction {
-                        self.isPressed = true
-                    } onRelease: {
-                        self.isPressed = false
-                    }
-                }
-            )
-    }
-}
-
+/**
+    NavigationLink를 사용하여 Stack을 구현한다. ios16 이후에서 deprecated되는 isActive를 사용한다.
+ 
+ */
 struct HomeMainOldView: View {
     
     @EnvironmentObject var handler: ListHandler
     @State var isActive: Bool = false
+    @State var searchText: String = ""
     
     var body: some View {
         NavigationView {
@@ -87,6 +56,7 @@ struct HomeMainOldView: View {
                 }
             }
             .padding(.leading, 20)
+            .searchable(text: $searchText)
             .navigationBarTitle(!self.isActive ? "Home" : "", displayMode: .inline)
             .toolbar {
                 Button {
@@ -99,6 +69,10 @@ struct HomeMainOldView: View {
     }
 }
 
+/**
+    NavigationStack를 사용하여 Stack을 구현한다.
+    ListHandler를 무작의 생성하는 로직을 추가함
+ */
 struct HomeMainView: View {
     
     @EnvironmentObject var handler: ListHandler
@@ -109,7 +83,7 @@ struct HomeMainView: View {
         
         NavigationStack {
             VStack(alignment: .leading) {
-                Text("List Count : \(handler.list.count)")
+                Text("List Count : \(handler.count())")
                 
                 ScrollView {
                     LazyVStack(alignment: .leading) {
@@ -142,6 +116,93 @@ struct HomeMainView: View {
                                 .background(Color.gray)
                                 .frame(width:UIScreen.main.bounds.width, height:1)
                         }
+                    }
+                }.navigationDestination(isPresented: $isActive) {
+                    HomeItemView(item:self.current)
+                }
+            }
+            .searchable(text: $handler.searchText, prompt: "ID Search") {
+                ForEach($handler.recommendList) { result in
+                    Text("\(result.id)").searchCompletion(result.id)
+                }
+            }.onSubmit(of: .search) {
+                self.handler.submitSearch()
+            }
+            .padding(.leading, 20)
+            .padding(.trailing, 10)
+            .navigationBarTitle(!self.isActive ? "Home" : "", displayMode: .inline)
+            .toolbar {
+                Button {
+                    self.handler.addList()
+                } label: {
+                    Image(systemName: "plus")
+                }
+                Button {
+                    self.handler.isShake ? self.handler.stopShake() : self.handler.shakeList()
+                } label: {
+                    Image(systemName: self.handler.isShake ? "tornado.circle.fill" : "tornado.circle")
+                }
+            }
+        }
+    }
+}
+
+/**
+    FetchedRequest property를 사용하여 데이터를 불러온다.
+ */
+struct HomeMainFetchView: View {
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(sortDescriptors: CoreDataManager.shared.sortDescriptor())
+    var items: FetchedResults<ItemMO>
+    
+    @StateObject var handler = CoreDataListHandler()
+    @State private var isActive: Bool = false
+    @State var current = ItemModel(id: "", date: Date())
+    
+    var body: some View {
+        
+        NavigationStack {
+            VStack(alignment: .leading) {
+                Text("List Count : \(items.count)")
+                
+                ScrollView {
+                    LazyVStack(alignment: .leading) {
+                        
+                        ForEach(items) { item in
+                            
+                            HStack {
+                                Button {
+                                    if let id = item.id, let date = item.date {
+                                        self.current = ItemModel(id: id, date: date)
+                                        self.isActive = true
+                                    }
+                                } label: {
+                                    VStack {
+                                        Text("\(item.id!)")
+                                            .font(.headline)
+                                            .lineLimit(1)
+                                        Text("\(item.date!)")
+                                            .font(.subheadline)
+                                            .lineLimit(1)
+                                    }
+                                }
+                                Spacer()
+                                PressedButton(normalImage: Image(systemName: "minus.circle"),
+                                              pressedImage: Image(systemName: "minus.circle.fill")) {
+                                    
+                                    if let id = item.id, let date = item.date {
+                                        let item = ItemModel(id: id, date: date)
+                                        self.handler.delete(item: item)
+                                    }
+                                }
+                                              .frame(width: 40, height: 40)
+                            }
+                            
+                            Rectangle()
+                                .background(Color.gray)
+                                .frame(width:UIScreen.main.bounds.width, height:1)
+                        }
                     }.padding(.trailing, 10)
                 }.navigationDestination(isPresented: $isActive) {
                     HomeItemView(item:self.current)
@@ -155,6 +216,11 @@ struct HomeMainView: View {
                 } label: {
                     Image(systemName: "plus")
                 }
+                Button {
+                    self.handler.isShake ? self.handler.stopShake() : self.handler.shakeList()
+                } label: {
+                    Image(systemName: self.handler.isShake ? "tornado.circle.fill" : "tornado.circle")
+                }
             }
         }
     }
@@ -162,7 +228,11 @@ struct HomeMainView: View {
 
 struct ListHandlerView_Previews: PreviewProvider {
     static var previews: some View {
-        let handler = SampleListHandler()
-        HomeMainView().environmentObject(handler as ListHandler)
+        Group {
+            let handler = SampleListHandler()
+            HomeMainView().environmentObject(handler as ListHandler)
+            
+            HomeMainFetchView().environment(\.managedObjectContext, CoreDataManager.shared.mainContext)
+        }
     }
 }

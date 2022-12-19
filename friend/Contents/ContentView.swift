@@ -7,31 +7,27 @@
 
 import SwiftUI
 
-struct Page2: View {
-    var body: some View {
-        Text("PAGE 2")
-    }
-}
-
 struct ContentView: View {
     
-    let handler = ListHandler()
+    let handler = CoreDataListHandler()
+    let counter = LetterCounter()
     
     var body: some View {
         
         TabView {
-            HomeMainView()
-                .environmentObject(self.handler)
-                .tabItem{
-                    Image(systemName: "house")
-                    Text("Home")
-                }
             
-            Page2()
+            HomeMainView()
+                .environmentObject(self.handler as ListHandler) // enviormentObject로 사용하여 하위 view에서도 선언을 통해 공통적으로 사용 가능하다.
                 .tabItem{
-                    Image(systemName: "gear")
-                    Text("Setting")
+                    Label("Home", systemImage: "house")
                 }
+
+            GraphView(counter: self.counter) // 앱 생성 시점에 주입하여 사용한다.
+                .tabItem{
+                    Label("Chart", systemImage: "sum")
+                }
+        }.onAppear {
+            self.counter.sources = self.handler
         }
     }
 }

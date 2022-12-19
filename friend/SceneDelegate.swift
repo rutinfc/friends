@@ -19,6 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, ObservableObject {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
+        let tabappearence = UITabBarAppearance()
+        tabappearence.configureWithDefaultBackground()
+        
+        UITabBar.appearance().scrollEdgeAppearance = tabappearence
+        UITabBar.appearance().standardAppearance = tabappearence
+        
         let contentView = ContentView()
         
         // Use a UIHostingController as window root view controller.
