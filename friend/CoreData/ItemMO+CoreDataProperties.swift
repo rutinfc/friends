@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 extension ItemMO {
-
+    
     @nonobjc public class func fetchRequest() -> NSFetchRequest<ItemMO> {
         return NSFetchRequest<ItemMO>(entityName: "ItemMO")
     }
@@ -21,5 +21,4 @@ extension ItemMO {
 
     @NSManaged public var date: Date?
     @NSManaged public var id: String?
-
 }

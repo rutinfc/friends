@@ -9,7 +9,21 @@
 /* Begin PBXBuildFile section */
 		3535B4EA294856BF0020CA15 /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535B4E9294856BF0020CA15 /* UIKitExtension.swift */; };
 		3535B4EB294856BF0020CA15 /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535B4E9294856BF0020CA15 /* UIKitExtension.swift */; };
+		3569079E295A7BF40025CAA6 /* LottoRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3569079D295A7BF40025CAA6 /* LottoRecordView.swift */; };
+		356907A0295A7E170025CAA6 /* LottoListHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3569079F295A7E170025CAA6 /* LottoListHandler.swift */; };
+		3576CF73295ACD9B00D8601F /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3576CF72295ACD9B00D8601F /* CoreDataHandler.swift */; };
+		3576CF78295B026A00D8601F /* LottoRecordMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3576CF77295B026A00D8601F /* LottoRecordMO+CoreDataClass.swift */; };
+		3576CF79295B026A00D8601F /* LottoRecordMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3576CF76295B026A00D8601F /* LottoRecordMO+CoreDataProperties.swift */; };
 		35782FB9294071A1006986A6 /* FriendUI.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35782FB72940719D006986A6 /* FriendUI.plist */; };
+		3584195B2959801200E59C95 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3584195E2959801200E59C95 /* Localizable.strings */; };
+		3584195C2959801200E59C95 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3584195E2959801200E59C95 /* Localizable.strings */; };
+		35841961295982CC00E59C95 /* LottoBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35841960295982CC00E59C95 /* LottoBallView.swift */; };
+		35841962295982CC00E59C95 /* LottoBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35841960295982CC00E59C95 /* LottoBallView.swift */; };
+		358419642959865E00E59C95 /* LetterListHandlerCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358419632959865E00E59C95 /* LetterListHandlerCounter.swift */; };
+		35841967295990F100E59C95 /* LottoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35841966295990F100E59C95 /* LottoListView.swift */; };
+		35841968295990F100E59C95 /* LottoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35841966295990F100E59C95 /* LottoListView.swift */; };
+		3584196A29599CBB00E59C95 /* LottoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3584196929599CBB00E59C95 /* LottoRowView.swift */; };
+		3584196B29599CBB00E59C95 /* LottoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3584196929599CBB00E59C95 /* LottoRowView.swift */; };
 		35A401AC2949C33600082CD6 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A401AB2949C33600082CD6 /* SwiftUIExtension.swift */; };
 		35A401AD2949C33600082CD6 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A401AB2949C33600082CD6 /* SwiftUIExtension.swift */; };
 		35A7DAFE29471BFF001DB392 /* NavigationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A7DAFD29471BFF001DB392 /* NavigationTest.swift */; };
@@ -86,7 +100,17 @@
 
 /* Begin PBXFileReference section */
 		3535B4E9294856BF0020CA15 /* UIKitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtension.swift; sourceTree = "<group>"; };
+		3569079D295A7BF40025CAA6 /* LottoRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoRecordView.swift; sourceTree = "<group>"; };
+		3569079F295A7E170025CAA6 /* LottoListHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoListHandler.swift; sourceTree = "<group>"; };
+		3576CF72295ACD9B00D8601F /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
+		3576CF76295B026A00D8601F /* LottoRecordMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LottoRecordMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3576CF77295B026A00D8601F /* LottoRecordMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LottoRecordMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		35782FB72940719D006986A6 /* FriendUI.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = FriendUI.plist; path = friend/FriendUI.plist; sourceTree = SOURCE_ROOT; };
+		3584195D2959801200E59C95 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		35841960295982CC00E59C95 /* LottoBallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoBallView.swift; sourceTree = "<group>"; };
+		358419632959865E00E59C95 /* LetterListHandlerCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterListHandlerCounter.swift; sourceTree = "<group>"; };
+		35841966295990F100E59C95 /* LottoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoListView.swift; sourceTree = "<group>"; };
+		3584196929599CBB00E59C95 /* LottoRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoRowView.swift; sourceTree = "<group>"; };
 		35A401AB2949C33600082CD6 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
 		35A7DAFD29471BFF001DB392 /* NavigationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTest.swift; sourceTree = "<group>"; };
 		8105C10229501EE800BEACB6 /* ItemMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -161,6 +185,24 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		3569079C295A7BD60025CAA6 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				3569079D295A7BF40025CAA6 /* LottoRecordView.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		3584195F295982B300E59C95 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				35841960295982CC00E59C95 /* LottoBallView.swift */,
+				35841966295990F100E59C95 /* LottoListView.swift */,
+				3584196929599CBB00E59C95 /* LottoRowView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
 		8105C109295036CA00BEACB6 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,10 +214,13 @@
 		8171E200294AFA2F009A51B6 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				3576CF77295B026A00D8601F /* LottoRecordMO+CoreDataClass.swift */,
+				3576CF76295B026A00D8601F /* LottoRecordMO+CoreDataProperties.swift */,
 				8105C10329501EE800BEACB6 /* ItemMO+CoreDataClass.swift */,
 				8105C10229501EE800BEACB6 /* ItemMO+CoreDataProperties.swift */,
 				8171E20A294B2237009A51B6 /* CoreDataPublisher.swift */,
 				8171E1FE294AF9FE009A51B6 /* CoreDataManager.swift */,
+				3576CF72295ACD9B00D8601F /* CoreDataHandler.swift */,
 				8171E201294AFA4F009A51B6 /* Model.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -220,6 +265,7 @@
 				8182E93529386B4A000C8D18 /* LaunchScreen.storyboard */,
 				8182E93829386B4A000C8D18 /* Info.plist */,
 				35782FB72940719D006986A6 /* FriendUI.plist */,
+				3584195E2959801200E59C95 /* Localizable.strings */,
 			);
 			path = friend;
 			sourceTree = "<group>";
@@ -251,6 +297,8 @@
 		81DDEEC7293F29DA0059278E /* Contents */ = {
 			isa = PBXGroup;
 			children = (
+				3569079C295A7BD60025CAA6 /* Record */,
+				3584195F295982B300E59C95 /* CustomView */,
 				81DDEEC5293F24200059278E /* ContentView.swift */,
 				81DDEECB293F3E580059278E /* HomeMainView.swift */,
 				8161B2252942F96900D30C62 /* HomeItemView.swift */,
@@ -265,6 +313,8 @@
 			children = (
 				81DDEECE293F40C60059278E /* ListHandler.swift */,
 				813DD9FF29528D2400C7B6DD /* LetterCounter.swift */,
+				358419632959865E00E59C95 /* LetterListHandlerCounter.swift */,
+				3569079F295A7E170025CAA6 /* LottoListHandler.swift */,
 			);
 			path = Handler;
 			sourceTree = "<group>";
@@ -394,6 +444,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8182E93729386B4A000C8D18 /* LaunchScreen.storyboard in Resources */,
+				3584195B2959801200E59C95 /* Localizable.strings in Resources */,
 				8182E93429386B4A000C8D18 /* Assets.xcassets in Resources */,
 				8182E93229386B4A000C8D18 /* Main.storyboard in Resources */,
 			);
@@ -418,6 +469,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81DDEEBC293F1F560059278E /* LaunchScreen.storyboard in Resources */,
+				3584195C2959801200E59C95 /* Localizable.strings in Resources */,
 				35782FB9294071A1006986A6 /* FriendUI.plist in Resources */,
 				81DDEEBD293F1F560059278E /* Assets.xcassets in Resources */,
 			);
@@ -431,12 +483,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				8161B2262942F96900D30C62 /* HomeItemView.swift in Sources */,
+				3576CF78295B026A00D8601F /* LottoRecordMO+CoreDataClass.swift in Sources */,
 				8182E92F29386B4A000C8D18 /* ViewController.swift in Sources */,
 				8105C1072950368200BEACB6 /* PreesedButton.swift in Sources */,
 				81DDEECC293F3E580059278E /* HomeMainView.swift in Sources */,
+				3584196A29599CBB00E59C95 /* LottoRowView.swift in Sources */,
 				81DDEEC6293F24200059278E /* ContentView.swift in Sources */,
+				3576CF73295ACD9B00D8601F /* CoreDataHandler.swift in Sources */,
 				8171E20B294B2237009A51B6 /* CoreDataPublisher.swift in Sources */,
 				81DDEECF293F40C60059278E /* ListHandler.swift in Sources */,
+				3576CF79295B026A00D8601F /* LottoRecordMO+CoreDataProperties.swift in Sources */,
 				8105C10429501EE800BEACB6 /* ItemMO+CoreDataClass.swift in Sources */,
 				35A401AC2949C33600082CD6 /* SwiftUIExtension.swift in Sources */,
 				8182E92B29386B4A000C8D18 /* AppDelegate.swift in Sources */,
@@ -448,6 +504,11 @@
 				8171E1FF294AF9FE009A51B6 /* CoreDataManager.swift in Sources */,
 				8171E203294AFA4F009A51B6 /* Model.xcdatamodeld in Sources */,
 				8105C10529501EE800BEACB6 /* ItemMO+CoreDataProperties.swift in Sources */,
+				35841961295982CC00E59C95 /* LottoBallView.swift in Sources */,
+				3569079E295A7BF40025CAA6 /* LottoRecordView.swift in Sources */,
+				356907A0295A7E170025CAA6 /* LottoListHandler.swift in Sources */,
+				358419642959865E00E59C95 /* LetterListHandlerCounter.swift in Sources */,
+				35841967295990F100E59C95 /* LottoListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,8 +537,11 @@
 				813DDA0129528D2400C7B6DD /* LetterCounter.swift in Sources */,
 				35A401AD2949C33600082CD6 /* SwiftUIExtension.swift in Sources */,
 				8105C1082950368200BEACB6 /* PreesedButton.swift in Sources */,
+				3584196B29599CBB00E59C95 /* LottoRowView.swift in Sources */,
 				81ED31A02951B90E000BFF61 /* ViewExtension.swift in Sources */,
+				35841962295982CC00E59C95 /* LottoBallView.swift in Sources */,
 				3535B4EB294856BF0020CA15 /* UIKitExtension.swift in Sources */,
+				35841968295990F100E59C95 /* LottoListView.swift in Sources */,
 				81DDEEB7293F1F560059278E /* AppUI.swift in Sources */,
 				81ED319F2951B8B3000BFF61 /* GraphView.swift in Sources */,
 			);
@@ -499,6 +563,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3584195E2959801200E59C95 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3584195D2959801200E59C95 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		8182E93029386B4A000C8D18 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

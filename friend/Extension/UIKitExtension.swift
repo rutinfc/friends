@@ -18,3 +18,10 @@ extension UINavigationController: ObservableObject, UIGestureRecognizerDelegate 
         return viewControllers.count > 1
     }
 }
+
+
+extension String {
+    var localized: String {
+        return NSLocalizedString(self, comment: "번호기록")
+    }
+}
