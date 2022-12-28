@@ -13,7 +13,7 @@ struct FriendUIApp: App {
     
     var body: some Scene {
         WindowGroup {
-            View1()
+            ViewA()
         }
     }
 }

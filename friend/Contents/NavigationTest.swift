@@ -8,27 +8,50 @@
 import SwiftUI
 
 struct ViewA: View {
+    
+    var focusId = [0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
     @State var open = false
+    @State var roundText: String = ""
+    @FocusState var focusField: Int?
     
     var body: some View {
         NavigationStack {
-            VStack {
-                Text("View isPresent")
-
-                Button("Go to View 2") {
-                    open = true
+            ScrollViewReader { reader in
+                
+                ScrollView {
+                    VStack {
+                        Text("View isPresent : \(String(describing: self.focusField))")
+                         
+                        ForEach(focusId, id:\.self) { index in
+                            TextField("TEST\(index)", text: $roundText)
+                                .frame(height:40)
+                                .focused($focusField, equals: index)
+                                .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                                .onOutline()
+                        }
+                        
+                        Button("Go to View 2") {
+                            open = true
+                        }
+                    }
+                    .onSubmit {
+                        if let id = self.focusField, id < 10 {
+                            self.focusField = id + 1
+                        }
+                    }
                 }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle(!self.open ? "TEST1" : "")
-            .navigationDestination(isPresented: $open) {
-                ViewB()
-            }.toolbar {
-                Button {
-
-                } label: {
-                    Image(systemName: "plus")
+                .scrollDismissesKeyboard(.immediately)
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationTitle(!self.open ? "TEST1" : "")
+                .navigationDestination(isPresented: $open) {
+                    ViewB()
+                }.toolbar {
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "plus")
+                    }
                 }
             }
         }
@@ -111,14 +134,20 @@ struct View1: View {
     @State var titleFlag3: Bool = true
     
     var body: some View {
-
+        
         NavigationStack(path: $path) {
-            VStack {
-                Text("View NavigationLink")
-                NavigationLink("Go to View 2", value: "1")
+            
+            TabView {
+                VStack {
+                    Text("View NavigationLink")
+                    NavigationLink("Go to View 2", value: "1")
+                }.tabItem{
+                    Label("record", systemImage: "circle.hexagongrid.fill")
+                }
             }
+            
             .navigationDestination(for: String.self, destination: { value in
-
+                
                 switch value {
                 case "1":
                     View2(path: $path, titleFlag: $titleFlag2).onAppear{
@@ -144,10 +173,10 @@ struct View1: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 Button {
-
+                    
                 } label: {
                     Text("")
-//                    Image(systemName: "plus")
+                    //                    Image(systemName: "plus")
                 }
             }
         }

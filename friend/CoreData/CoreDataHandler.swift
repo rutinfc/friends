@@ -11,6 +11,7 @@ import Combine
 
 protocol EntityProtocol: NSManagedObject {
     associatedtype Entity: NSManagedObject
+    var identifier: String { get }
     static func fetchRequest() -> NSFetchRequest<Entity>
     static func newEntityDescription(context: NSManagedObjectContext) -> NSEntityDescription?
 }
@@ -29,11 +30,11 @@ class CoreDataHandler<InOutEntity> where InOutEntity: EntityProtocol {
         
         self.persistentContainer.performBackgroundTask { context in
             
-            guard let entity = InOutEntity.newEntityDescription(context: context) else {
+            guard let entityDesciption = InOutEntity.newEntityDescription(context: context) else {
                 return
             }
             
-            guard let managedObject = NSManagedObject(entity: entity, insertInto: context) as? InOutEntity else {
+            guard let managedObject = NSManagedObject(entity: entityDesciption, insertInto: context) as? InOutEntity else {
                 return
             }
             
@@ -49,6 +50,33 @@ class CoreDataHandler<InOutEntity> where InOutEntity: EntityProtocol {
         }
     }
     
+    func newOrUpdate(predicate:NSPredicate?, item:@escaping(InOutEntity?) -> Bool) {
+        
+        let fetchRequest = InOutEntity.fetchRequest()
+        fetchRequest.predicate = predicate
+
+        self.persistentContainer.performBackgroundTask { context in
+            
+            do {
+                var entity = try context.fetch(fetchRequest).first as? InOutEntity
+                
+                if entity == nil {
+                    if let entityDesciption = InOutEntity.newEntityDescription(context: context),
+                        let managedObject = NSManagedObject(entity: entityDesciption, insertInto: context) as? InOutEntity {
+                        entity = managedObject
+                    }
+                }
+                    
+                if item(entity) {
+                    try context.save()
+                }
+                    
+            } catch {
+                print("Fetch Request Error : \(error)")
+            }
+        }
+    }
+    
     func listPublisher() -> AnyPublisher<[InOutEntity.Entity], NSError> {
         
         let fetchRequest = InOutEntity.fetchRequest()
@@ -60,6 +88,6 @@ class CoreDataHandler<InOutEntity> where InOutEntity: EntityProtocol {
     }
     
     func sortDescriptor() -> [NSSortDescriptor] {
-        return [NSSortDescriptor(key: "date", ascending: false)]
+        return [NSSortDescriptor(key: "date", ascending: true)]
     }
 }

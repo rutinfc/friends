@@ -26,3 +26,28 @@ extension RootPresentationMode {
         self.toggle()
     }
 }
+
+
+struct HideTabbarKey: EnvironmentKey {
+    static let defaultValue: Binding<HideTabbar> = .constant(HideTabbar())
+}
+
+extension EnvironmentValues {
+    var hideTabbar: Binding<HideTabbar> {
+        get { return self[HideTabbarKey.self] }
+        set { self[HideTabbarKey.self] = newValue }
+    }
+}
+
+typealias HideTabbar = Bool
+
+extension HideTabbar {
+    
+    public mutating func hidden() {
+        self = true
+    }
+    
+    public mutating func show() {
+        self = false
+    }
+}

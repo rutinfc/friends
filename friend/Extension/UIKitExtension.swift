@@ -25,3 +25,26 @@ extension String {
         return NSLocalizedString(self, comment: "번호기록")
     }
 }
+
+// MARK: Retrieve TextField first responder for keyboard
+extension UIResponder {
+
+  private static weak var currentResponder: UIResponder?
+
+  static var currentFirstResponder: UIResponder? {
+    currentResponder = nil
+    UIApplication.shared.sendAction(#selector(UIResponder.findFirstResponder),
+                                    to: nil, from: nil, for: nil)
+    return currentResponder
+  }
+
+  @objc private func findFirstResponder(_ sender: Any) {
+    UIResponder.currentResponder = self
+  }
+
+  // Frame of the superview
+  var globalFrame: CGRect? {
+    guard let view = self as? UIView else { return nil }
+    return view.superview?.convert(view.frame, to: nil)
+  }
+}

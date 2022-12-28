@@ -10,13 +10,14 @@ import SwiftUI
 struct ContentView: View {
     
     let handler = CoreDataListHandler()
+    let lottoHandler = LottoCorDataListHandler()
     let counter = LetterListHandlerCounter()
     
     var body: some View {
         
         TabView {
-            
-            LottoRecordView(handler: LottoCorDataListHandler())
+            LottoRecordView()
+                .environmentObject(self.lottoHandler as LottoListHandler)
                 .tabItem{
                     Label("record".localized, systemImage: "circle.hexagongrid.fill")
                 }
@@ -31,7 +32,8 @@ struct ContentView: View {
                 .tabItem{
                     Label("Chart", systemImage: "sum")
                 }
-        }.onAppear {
+        }
+        .onAppear {
             self.counter.sources = self.handler
         }
     }

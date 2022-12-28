@@ -21,7 +21,7 @@ struct LottoRecordSection: Identifiable, Equatable, Hashable {
     }
 }
 
-struct LottoRecordRowItem: Identifiable, Equatable, Hashable {
+struct LottoRecordItem: Identifiable, Equatable, Hashable {
     var id: String
     var round: Int = 1
     var numbers: [Int]
@@ -36,25 +36,42 @@ struct LottoRecordRowItem: Identifiable, Equatable, Hashable {
     }
 }
 
-extension LottoRecordRowItem {
-    static func sampleItem() -> LottoRecordRowItem {
+extension LottoRecordItem {
+    static func sampleItem() -> LottoRecordItem {
         
-        let numbers = (0..<6).compactMap { _ in
-            return Int.random(in: 1...45)
+        let numbers = randomUniqueNumber(length: 6, range: (1...45))
+        
+        return LottoRecordItem(id: UUID().description, numbers: numbers.sorted(by: {$0 < $1} ))
+    }
+    
+    static func randomUniqueNumber(length:Int, range:ClosedRange<Int>) -> [Int] {
+        
+        var result = [Int]()
+        
+        while(result.count < length) {
+            result = self.addUniqueRandomNumbers(length: length, range: range, numbers: result)
         }
         
-        return LottoRecordRowItem(id: UUID().description, numbers: numbers.sorted(by: {$0 < $1} ))
+        return result.suffix(length)
+    }
+    
+    static func addUniqueRandomNumbers(length:Int, range:ClosedRange<Int>, numbers: [Int]) -> [Int] {
+        var result = (0..<length).compactMap { _ in
+            return Int.random(in:range)
+        }
+        result.append(contentsOf: numbers)
+        return Array(Set(result))
     }
 }
 
 class LottoListHandler: ObservableObject {
     
     @Published var sections = [LottoRecordSection]()
-    @Published var records = [Int:[LottoRecordRowItem]]()
+    @Published var records = [Int:[LottoRecordItem]]()
     
     var cancellable = Set<AnyCancellable>()
     
-    func lastItem() -> LottoRecordRowItem? {
+    func lastItem() -> LottoRecordItem? {
         guard let last = self.sections.last else {
             return nil
         }
@@ -64,18 +81,13 @@ class LottoListHandler: ObservableObject {
     
     func addList() {
         
-        let item = LottoRecordRowItem.sampleItem()
-        
-        if var list = self.records[item.round] {
-            list.append(item)
-            self.records[item.round] = list
-        } else {
-            self.records[item.round] = [item]
-            self.sections.append(LottoRecordSection(id: UUID().description, round: item.round))
-        }
     }
     
-    func delete(item: LottoRecordRowItem) {
+    func modify(item: LottoRecordItem) {
+        
+    }
+    
+    func delete(item: LottoRecordItem) {
         
         guard var list = self.records[item.round] else {
             return
@@ -104,6 +116,19 @@ class LottoSampleListHandler: LottoListHandler {
             self.addList()
         }
     }
+    
+    override func addList() {
+        
+        let item = LottoRecordItem.sampleItem()
+        
+        if var list = self.records[item.round] {
+            list.append(item)
+            self.records[item.round] = list
+        } else {
+            self.records[item.round] = [item]
+            self.sections.append(LottoRecordSection(id: UUID().description, round: item.round))
+        }
+    }
 }
 
 class LottoCorDataListHandler: LottoListHandler {
@@ -113,44 +138,48 @@ class LottoCorDataListHandler: LottoListHandler {
     override init() {
         super.init()
         
-        self.dataHandler.listPublisher().sink { result in
-            switch result {
-            case .finished:
-                break
-            case .failure(let error) :
-                print("Error : \(error)")
-            }
-        } receiveValue: { [weak self] result in
-            
-            guard let self = self else { return }
-            
-            let list = result.compactMap { mo in
-
-                guard let numbers = mo.numbers,
-                        let date = mo.date else {
-                    return nil
+        self.dataHandler.listPublisher()
+            .dropFirst(1)
+            .sink { result in
+                switch result {
+                case .finished:
+                    break
+                case .failure(let error) :
+                    print("Error : \(error)")
                 }
-                return LottoRecordRowItem(id: mo.identifier,
-                                          round: mo.round,
-                                          numbers: numbers,
-                                          fixed: mo.fixed,
-                                          date: date)
-            } as [LottoRecordRowItem]
-            
-            self.records = Dictionary(grouping: list) { item in
-                return item.round
-            }
-            
-            self.sections = self.records.keys.compactMap { round in
-                return LottoRecordSection(round: round)
-            }
-            
-        }.store(in: &self.cancellable)
+            } receiveValue: { [weak self] result in
+                
+                guard let self = self else { return }
+                
+                let list = result.compactMap { mo in
+                    
+                    guard let numbers = mo.numbers,
+                          let date = mo.date else {
+                        return nil
+                    }
+                    return LottoRecordItem(id: mo.identifier,
+                                           round: mo.round,
+                                           numbers: numbers,
+                                           fixed: mo.fixed,
+                                           date: date)
+                } as [LottoRecordItem]
+                
+                self.records = Dictionary(grouping: list) { item in
+                    return item.round
+                }
+                
+                self.sections = self.records.keys.compactMap { round in
+                    return LottoRecordSection(round: round)
+                }
+                
+                print("Update DataList : \(self.sections.count) | \(self.records.count)")
+                
+            }.store(in: &self.cancellable)
     }
     
     override func addList() {
         
-        let item = LottoRecordRowItem.sampleItem()
+        let item = LottoRecordItem.sampleItem()
         
         self.dataHandler.insert { mo in
             mo.identifier = item.id
@@ -158,6 +187,24 @@ class LottoCorDataListHandler: LottoListHandler {
             mo.date = item.date
             mo.round = item.round
             mo.numbers = item.numbers
+            return true
+        }
+    }
+    
+    override func modify(item: LottoRecordItem) {
+        
+        let predicate = NSPredicate(format: "identifier == %@", item.id)
+        
+        self.dataHandler.newOrUpdate(predicate: predicate) { mo in
+            guard let managedObject = mo else {
+                return false
+            }
+            
+            managedObject.identifier = item.id
+            managedObject.fixed = item.fixed
+            managedObject.date = item.date
+            managedObject.round = item.round
+            managedObject.numbers = item.numbers
             return true
         }
     }

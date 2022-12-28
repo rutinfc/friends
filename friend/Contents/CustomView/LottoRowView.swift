@@ -11,7 +11,7 @@ import SwiftUI
 
 struct LottoRowView: View {
     
-    var item: LottoRecordRowItem
+    var item: LottoRecordItem
     
     var body: some View {
         
@@ -46,7 +46,7 @@ struct LottoRowView: View {
 
 struct LottoRowView_Previews: PreviewProvider {
     
-    static var item = LottoRecordRowItem.sampleItem()
+    static var item = LottoRecordItem.sampleItem()
     
     static var previews: some View {
         LottoRowView(item: self.item).frame(height:60)

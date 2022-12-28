@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3535B4EA294856BF0020CA15 /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535B4E9294856BF0020CA15 /* UIKitExtension.swift */; };
 		3535B4EB294856BF0020CA15 /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535B4E9294856BF0020CA15 /* UIKitExtension.swift */; };
+		35369808295C1F1600D9D98B /* LottoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35369807295C1F1600D9D98B /* LottoDetailView.swift */; };
+		3536980A295C35BD00D9D98B /* LottoOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35369809295C35BD00D9D98B /* LottoOrderView.swift */; };
 		3569079E295A7BF40025CAA6 /* LottoRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3569079D295A7BF40025CAA6 /* LottoRecordView.swift */; };
 		356907A0295A7E170025CAA6 /* LottoListHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3569079F295A7E170025CAA6 /* LottoListHandler.swift */; };
 		3576CF73295ACD9B00D8601F /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3576CF72295ACD9B00D8601F /* CoreDataHandler.swift */; };
@@ -23,7 +25,6 @@
 		35841967295990F100E59C95 /* LottoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35841966295990F100E59C95 /* LottoListView.swift */; };
 		35841968295990F100E59C95 /* LottoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35841966295990F100E59C95 /* LottoListView.swift */; };
 		3584196A29599CBB00E59C95 /* LottoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3584196929599CBB00E59C95 /* LottoRowView.swift */; };
-		3584196B29599CBB00E59C95 /* LottoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3584196929599CBB00E59C95 /* LottoRowView.swift */; };
 		35A401AC2949C33600082CD6 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A401AB2949C33600082CD6 /* SwiftUIExtension.swift */; };
 		35A401AD2949C33600082CD6 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A401AB2949C33600082CD6 /* SwiftUIExtension.swift */; };
 		35A7DAFE29471BFF001DB392 /* NavigationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A7DAFD29471BFF001DB392 /* NavigationTest.swift */; };
@@ -100,6 +101,8 @@
 
 /* Begin PBXFileReference section */
 		3535B4E9294856BF0020CA15 /* UIKitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtension.swift; sourceTree = "<group>"; };
+		35369807295C1F1600D9D98B /* LottoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoDetailView.swift; sourceTree = "<group>"; };
+		35369809295C35BD00D9D98B /* LottoOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoOrderView.swift; sourceTree = "<group>"; };
 		3569079D295A7BF40025CAA6 /* LottoRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoRecordView.swift; sourceTree = "<group>"; };
 		3569079F295A7E170025CAA6 /* LottoListHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoListHandler.swift; sourceTree = "<group>"; };
 		3576CF72295ACD9B00D8601F /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
@@ -189,6 +192,8 @@
 			isa = PBXGroup;
 			children = (
 				3569079D295A7BF40025CAA6 /* LottoRecordView.swift */,
+				35369807295C1F1600D9D98B /* LottoDetailView.swift */,
+				35369809295C35BD00D9D98B /* LottoOrderView.swift */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -485,6 +490,7 @@
 				8161B2262942F96900D30C62 /* HomeItemView.swift in Sources */,
 				3576CF78295B026A00D8601F /* LottoRecordMO+CoreDataClass.swift in Sources */,
 				8182E92F29386B4A000C8D18 /* ViewController.swift in Sources */,
+				3536980A295C35BD00D9D98B /* LottoOrderView.swift in Sources */,
 				8105C1072950368200BEACB6 /* PreesedButton.swift in Sources */,
 				81DDEECC293F3E580059278E /* HomeMainView.swift in Sources */,
 				3584196A29599CBB00E59C95 /* LottoRowView.swift in Sources */,
@@ -502,6 +508,7 @@
 				81DDEECA293F3C9D0059278E /* ViewExtension.swift in Sources */,
 				81ED319E2951B6EE000BFF61 /* GraphView.swift in Sources */,
 				8171E1FF294AF9FE009A51B6 /* CoreDataManager.swift in Sources */,
+				35369808295C1F1600D9D98B /* LottoDetailView.swift in Sources */,
 				8171E203294AFA4F009A51B6 /* Model.xcdatamodeld in Sources */,
 				8105C10529501EE800BEACB6 /* ItemMO+CoreDataProperties.swift in Sources */,
 				35841961295982CC00E59C95 /* LottoBallView.swift in Sources */,
@@ -537,7 +544,6 @@
 				813DDA0129528D2400C7B6DD /* LetterCounter.swift in Sources */,
 				35A401AD2949C33600082CD6 /* SwiftUIExtension.swift in Sources */,
 				8105C1082950368200BEACB6 /* PreesedButton.swift in Sources */,
-				3584196B29599CBB00E59C95 /* LottoRowView.swift in Sources */,
 				81ED31A02951B90E000BFF61 /* ViewExtension.swift in Sources */,
 				35841962295982CC00E59C95 /* LottoBallView.swift in Sources */,
 				3535B4EB294856BF0020CA15 /* UIKitExtension.swift in Sources */,
