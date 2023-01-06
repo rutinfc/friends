@@ -30,14 +30,14 @@ struct LottoRowView: View {
                 }
                 Spacer(minLength: 10)
                 
-                Rectangle().frame(height:1).foregroundColor(Color("RowLine"))
+                Rectangle().frame(height:1).foregroundColor(Color.List.rowLine)
             }
             .padding(.leading, 24)
             .padding(.trailing, 20)
             
             if item.fixed {
                 Image(systemName: "lock.circle")
-                    .foregroundColor(Color.red.opacity(0.8))
+                    .foregroundColor(Color.Common.point)
                     .padding(.leading, 10)
             }
         }

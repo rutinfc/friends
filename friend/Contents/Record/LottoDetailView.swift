@@ -9,38 +9,45 @@ import SwiftUI
 
 struct LottoDetailView: View {
     
-    @Binding var item: LottoRecordItem
-    
     @EnvironmentObject var handler: LottoListHandler
     
     @State var modifyNumber = false
     
     var body: some View {
         VStack {
-            Text("\(item.round)회")
-            Text("\(String(describing: item.numbers))")
+            Text("\(handler.selection.round)회")
+            Text("\(String(describing: handler.selection.numbers))")
         }
         .navigationBarTitle("detail".localized)
         .toolbar {
             Button {
-                //                    self.handler.addList()
                 self.modifyNumber = true
             } label: {
                 Image(systemName: "square.and.pencil")
             }
+            .foregroundColor(self.handler.selection.fixed ? Color.Button.disable : Color.Common.point)
+            .disabled(self.handler.selection.fixed)
+        }
+        .toolbar {
+            Button {
+                var fixed = self.handler.selection.fixed
+                fixed.toggle()
+                self.handler.modifySelection(fixed: fixed)
+            } label: {
+                Image(systemName: handler.selection.fixed ? "lock" : "lock.open")
+            }
+            .foregroundColor(Color.Common.point)
         }
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $modifyNumber) {
-            LottoOrderView(item:$item)
+            LottoOrderView()
         }
     }
 }
 
 struct LottoDetailView_Previews: PreviewProvider {
     
-    @State static var item = LottoRecordItem.sampleItem()
-    
     static var previews: some View {
-        LottoDetailView(item:$item)
+        LottoDetailView()
     }
 }

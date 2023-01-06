@@ -68,6 +68,7 @@ class LottoListHandler: ObservableObject {
     
     @Published var sections = [LottoRecordSection]()
     @Published var records = [Int:[LottoRecordItem]]()
+    @Published var selection = LottoRecordItem.sampleItem()
     
     var cancellable = Set<AnyCancellable>()
     
@@ -81,6 +82,17 @@ class LottoListHandler: ObservableObject {
     
     func addList() {
         
+    }
+    
+    func modifySelection(id: String? = nil, round: Int? = nil, numbers: [Int]? = nil, fixed: Bool? = nil) {
+        
+        let item = LottoRecordItem(id: id ?? self.selection.id ,
+                                   round: round ?? self.selection.round,
+                                   numbers: numbers ?? self.selection.numbers,
+                                   fixed: fixed ?? self.selection.fixed,
+                                   date: Date())
+        
+        self.modify(item: item)
     }
     
     func modify(item: LottoRecordItem) {
@@ -170,6 +182,10 @@ class LottoCorDataListHandler: LottoListHandler {
                 
                 self.sections = self.records.keys.compactMap { round in
                     return LottoRecordSection(round: round)
+                }
+                
+                if let changedSelection = list.filter({$0.id == self.selection.id}).first {
+                    self.selection = changedSelection
                 }
                 
                 print("Update DataList : \(self.sections.count) | \(self.records.count)")

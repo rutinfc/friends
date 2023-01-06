@@ -48,3 +48,10 @@ extension UIResponder {
     return view.superview?.convert(view.frame, to: nil)
   }
 }
+
+extension UIApplication {
+    
+    var firstWindows: UIWindow? {
+        return UIApplication.shared.connectedScenes.compactMap({$0 as? UIWindowScene}).first?.windows.first
+    }
+}

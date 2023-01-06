@@ -28,6 +28,8 @@
 		35A401AC2949C33600082CD6 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A401AB2949C33600082CD6 /* SwiftUIExtension.swift */; };
 		35A401AD2949C33600082CD6 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A401AB2949C33600082CD6 /* SwiftUIExtension.swift */; };
 		35A7DAFE29471BFF001DB392 /* NavigationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A7DAFD29471BFF001DB392 /* NavigationTest.swift */; };
+		35D1ED9B29680DDE002FA940 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D1ED9A29680DDE002FA940 /* ColorExtension.swift */; };
+		35D1ED9C29680DDE002FA940 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D1ED9A29680DDE002FA940 /* ColorExtension.swift */; };
 		8105C10429501EE800BEACB6 /* ItemMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105C10329501EE800BEACB6 /* ItemMO+CoreDataClass.swift */; };
 		8105C10529501EE800BEACB6 /* ItemMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105C10229501EE800BEACB6 /* ItemMO+CoreDataProperties.swift */; };
 		8105C1072950368200BEACB6 /* PreesedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105C1062950368200BEACB6 /* PreesedButton.swift */; };
@@ -116,6 +118,7 @@
 		3584196929599CBB00E59C95 /* LottoRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoRowView.swift; sourceTree = "<group>"; };
 		35A401AB2949C33600082CD6 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
 		35A7DAFD29471BFF001DB392 /* NavigationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTest.swift; sourceTree = "<group>"; };
+		35D1ED9A29680DDE002FA940 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		8105C10229501EE800BEACB6 /* ItemMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8105C10329501EE800BEACB6 /* ItemMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8105C1062950368200BEACB6 /* PreesedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreesedButton.swift; sourceTree = "<group>"; };
@@ -184,6 +187,7 @@
 				81DDEEC9293F3C9D0059278E /* ViewExtension.swift */,
 				3535B4E9294856BF0020CA15 /* UIKitExtension.swift */,
 				35A401AB2949C33600082CD6 /* SwiftUIExtension.swift */,
+				35D1ED9A29680DDE002FA940 /* ColorExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -496,6 +500,7 @@
 				3584196A29599CBB00E59C95 /* LottoRowView.swift in Sources */,
 				81DDEEC6293F24200059278E /* ContentView.swift in Sources */,
 				3576CF73295ACD9B00D8601F /* CoreDataHandler.swift in Sources */,
+				35D1ED9B29680DDE002FA940 /* ColorExtension.swift in Sources */,
 				8171E20B294B2237009A51B6 /* CoreDataPublisher.swift in Sources */,
 				81DDEECF293F40C60059278E /* ListHandler.swift in Sources */,
 				3576CF79295B026A00D8601F /* LottoRecordMO+CoreDataProperties.swift in Sources */,
@@ -549,6 +554,7 @@
 				3535B4EB294856BF0020CA15 /* UIKitExtension.swift in Sources */,
 				35841968295990F100E59C95 /* LottoListView.swift in Sources */,
 				81DDEEB7293F1F560059278E /* AppUI.swift in Sources */,
+				35D1ED9C29680DDE002FA940 /* ColorExtension.swift in Sources */,
 				81ED319F2951B8B3000BFF61 /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

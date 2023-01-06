@@ -49,7 +49,7 @@ struct HomeMainOldView: View {
                             }.padding(.trailing, 16)
                             
                             Rectangle()
-                                .background(Color.gray)
+                                .background(Color.Button.disable)
                                 .frame(width:UIScreen.main.bounds.width, height:1)
                         }
                     }
@@ -113,7 +113,7 @@ struct HomeMainView: View {
                             }
                             
                             Rectangle()
-                                .background(Color.gray)
+                                .background(Color.Button.disable)
                                 .frame(width:UIScreen.main.bounds.width, height:1)
                         }
                     }
@@ -200,7 +200,7 @@ struct HomeMainFetchView: View {
                             }
                             
                             Rectangle()
-                                .background(Color.gray)
+                                .background(Color.Button.disable)
                                 .frame(width:UIScreen.main.bounds.width, height:1)
                         }
                     }.padding(.trailing, 10)

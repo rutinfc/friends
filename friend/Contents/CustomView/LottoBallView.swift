@@ -12,41 +12,33 @@ struct LottoBall: Identifiable {
     var number: Int
 }
 
-struct LottoBallView: View {
-    
-    enum BallColor: String {
-        case blue = "BallBlue", red = "BallRed", green = "BallGreen", gray = "BallGray", yellow = "BallYellow"
-        
-        var color: Color {
-            return Color(self.rawValue)
-        }
-        
-        static func color(number:Int) -> Color {
-            var ballColorType: BallColor
-            if number < 10 {
-                ballColorType = .yellow
-            } else if number < 20 {
-                ballColorType = .blue
-            } else if number < 30 {
-                ballColorType = .red
-            } else if number < 40 {
-                ballColorType = .gray
-            } else {
-                ballColorType = .green
-            }
-            return ballColorType.color
+fileprivate extension Color.Ball {
+    static func number(_ number:Int) -> Color {
+        if number < 10 {
+            return Color.Ball.yellow
+        } else if number < 20 {
+            return Color.Ball.blue
+        } else if number < 30 {
+            return Color.Ball.red
+        } else if number < 40 {
+            return Color.Ball.gray
+        } else {
+            return Color.Ball.green
         }
     }
+}
+
+struct LottoBallView: View {
     
     var ball: LottoBall
     
     var body: some View {
         ZStack {
-            Circle().fill(BallColor.color(number: self.ball.number))
+            Circle().fill(Color.Ball.number(self.ball.number))
             Text("\(self.ball.number)")
                 .font(Font.system(size: 24, weight: .medium))
-                .foregroundColor(Color("BallNumber"))
-                .shadow(color:Color("BallLine"), radius: 1)
+                .foregroundColor(Color.Ball.number)
+                .shadow(color:Color.Ball.line, radius: 1)
         }
     }
 }
