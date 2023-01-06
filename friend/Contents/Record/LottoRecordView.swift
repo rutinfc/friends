@@ -11,7 +11,6 @@ struct LottoRecordView: View {
     
     @EnvironmentObject var handler: LottoListHandler
     @State private var isActive: Bool = false
-    @State var current = LottoRecordItem.sampleItem()
     @State var visibility = Visibility.visible
     
     var body: some View {
@@ -23,7 +22,7 @@ struct LottoRecordView: View {
                         ForEach(handler.sections) { section in
                             if let rows = self.handler.records[section.round] {
                                 ZStack(alignment: .leading) {
-                                    Color.gray.opacity(0.05)
+                                    Color.List.sectionBg
                                     VStack {
                                         Spacer(minLength: 10)
                                         Text(section.title)
@@ -35,7 +34,7 @@ struct LottoRecordView: View {
                                     
                                 ForEach(rows) { item in
                                     Button {
-                                        self.current = item
+                                        self.handler.selection = item
                                         self.isActive = true
                                     } label: {
                                         LottoRowView(item: item)
@@ -57,7 +56,7 @@ struct LottoRecordView: View {
                 self.visibility = .visible
             }
             .navigationDestination(isPresented: $isActive) {
-                LottoDetailView(item:$current)
+                LottoDetailView()
                     .onAppear {
                         self.visibility = .hidden
                     }

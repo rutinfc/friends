@@ -11,7 +11,9 @@ import Combine
 struct LottoOrderNumberButton: View {
     
     @Binding var selected: Bool
+    
     var number: Int
+    var lineColor: Color
     
     var body: some View {
         
@@ -32,7 +34,7 @@ struct LottoOrderNumberButton: View {
                         path.addLine(to: CGPoint(x: frame.maxX - 1, y: 15))
                     }
                     
-                    pathTop.stroke(Color("OrderLine"), lineWidth: 2)
+                    pathTop.stroke(self.lineColor, lineWidth: 2)
                     
                     let pathBottom = Path { path in
                         path.move(to: CGPoint(x: 1, y: frame.maxY - 15 ))
@@ -41,16 +43,16 @@ struct LottoOrderNumberButton: View {
                         path.addLine(to: CGPoint(x: frame.maxX - 1, y: frame.maxY - 15))
                     }
                     
-                    pathBottom.stroke(Color("OrderLine"), lineWidth: 2)
+                    pathBottom.stroke(self.lineColor, lineWidth: 2)
                     
                     if self.selected {
                         Capsule()
-                            .fill(Color("OrderMark"))
+                            .fill(Color.Order.mark)
                             .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
                     }
                     Text("\(number)")
                         .font(.system(size: 20, weight: .medium))
-                        .foregroundColor(self.selected ? Color("OrderNumberMark") : Color("OrderLine"))
+                        .foregroundColor(self.selected ? Color.Order.numberMark : self.lineColor)
                 }
             }
         }
@@ -74,19 +76,45 @@ struct LottoOrderView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @Binding var item: LottoRecordItem
-    
     @State var roundButtonSelect: Bool = false
     @State var roundText: String = ""
     
     @State var selectedMap = [Int:Bool]()
-    @State var round: Int = 1
+    
+    var selectedNumbers: [Int] {
+        return Array(self.selectedMap.filter({$0.value}).keys).sorted(by: {$0 < $1})
+    }
+    
+    var isDefault: Bool {
+        return Int(roundText) == self.handler.selection.round && self.selectedNumbers == self.handler.selection.numbers
+    }
+    
+    var enableChange: Bool {
+        
+        if self.selectedNumbers.count < 6 {
+            return false
+        }
+        
+        if self.isDefault {
+            return false
+        }
+        return true
+    }
+    
+    var lineColor: Color {
+        
+        if self.selectedNumbers.count == 6 || self.isDefault {
+            return Color.Button.disable
+        }
+        
+        return Color.Order.line
+    }
     
     private func binding(key:Int) -> Binding<Bool> {
         return Binding(
             get: {return self.selectedMap[key] ?? false},
             set: {
-                if $0 == true, self.selectedMap.values.filter({$0}).count >= 6 {
+                if $0 == true, self.selectedNumbers.count >= 6 {
                     return
                 }
                 self.selectedMap[key] = $0
@@ -97,7 +125,6 @@ struct LottoOrderView: View {
         
         NavigationView {
             VStack(spacing: 0) {
-                
                 
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .center, spacing:0) {
@@ -112,7 +139,7 @@ struct LottoOrderView: View {
                                 }
                             } else {
                                 VStack(alignment: .center) {
-                                    TextField("\(round)", text: $roundText)
+                                    TextField(roundText, text: $roundText)
                                         .focused($focusField)
                                         .multilineTextAlignment(.center)
                                         .keyboardType(.numberPad)
@@ -143,7 +170,8 @@ struct LottoOrderView: View {
                                                 }
                                             }
                                         }
-                                    Rectangle().frame(height:1).foregroundColor(Color("RowLine"))
+                                    Rectangle()
+                                        .frame(height:1).foregroundColor(Color.List.rowLine)
                                 }
                                 .onAppear {
                                     self.focusField = true
@@ -157,7 +185,7 @@ struct LottoOrderView: View {
                         
                         ZStack {
                             Rectangle()
-                                .strokeBorder(Color("OrderLine"), lineWidth: 2)
+                                .strokeBorder(self.lineColor, lineWidth: 2)
                             
                             HStack(alignment: .center, spacing:0) {
                                 VStack(alignment: .leading, spacing:0) {
@@ -168,7 +196,9 @@ struct LottoOrderView: View {
                                                 let number = (row * Grid.col) + column
                                                 
                                                 if number < 46 {
-                                                    LottoOrderNumberButton(selected: binding(key: number), number: number)
+                                                    LottoOrderNumberButton(selected: binding(key: number),
+                                                                           number: number,
+                                                                           lineColor: self.lineColor)
                                                         .frame(width: 30, height:46)
                                                     
                                                     if column < Grid.col {
@@ -200,7 +230,7 @@ struct LottoOrderView: View {
                 .padding(.trailing, 20)
                 
                 Rectangle()
-                    .foregroundColor(Color("RowLine"))
+                    .foregroundColor(Color.List.rowLine)
                     .frame(height: 1)
                 
                 VStack(spacing: 0) {
@@ -210,20 +240,21 @@ struct LottoOrderView: View {
                             return
                         }
                         
-                        let numbers = (self.selectedMap.filter({$1 == true}).keys.compactMap({$0}) as [Int]).sorted(by: {$0 < $1})
+                        let numbers = (self.selectedMap.filter({$1 == true})
+                            .keys.compactMap({$0}) as [Int])
+                            .sorted(by: {$0 < $1})
                         
-                        let item = LottoRecordItem(id: self.item.id, round: round, numbers: numbers, fixed: self.item.fixed, date: Date())
-                        
-                        self.handler.modify(item: item)
+                        self.handler.modifySelection(round: round, numbers: numbers)
                         
                         self.dismiss()
                         
                     } label: {
                         ZStack {
-                            Color.blue
-                            Text("save".localized).foregroundColor(.white)
+                            (self.enableChange) ? Color.Common.point : Color.Button.disable
+                            Text("save".localized).foregroundColor(Color.Button.text)
                         }.cornerRadius(8)
                     }
+                    .disabled(self.enableChange == false)
                     .frame(height: 40)
                     .padding(.top, 20)
                     .padding(.bottom, 10)
@@ -234,8 +265,8 @@ struct LottoOrderView: View {
                         
                     } label: {
                         ZStack {
-                            Color.blue
-                            Text("clear".localized).foregroundColor(.white)
+                            Color.Common.point
+                            Text("clear".localized).foregroundColor(Color.Button.text)
                         }.cornerRadius(8)
                     }
                     .frame(height:40)
@@ -250,8 +281,8 @@ struct LottoOrderView: View {
     
     private func reloadNumbers() {
         self.selectedMap.removeAll()
-        self.roundText = String(self.item.round)
-        self.item.numbers.forEach { number in
+        self.roundText = String(self.handler.selection.round)
+        self.handler.selection.numbers.forEach { number in
             self.selectedMap[number] = true
         }
     }
@@ -259,14 +290,13 @@ struct LottoOrderView: View {
 
 struct LottoOrderView_Previews: PreviewProvider {
     
-    @State static var item = LottoRecordItem.sampleItem()
     @State static var selected: Bool = true
     
     static var previews: some View {
         
         Group {
-            LottoOrderNumberButton(selected: $selected, number: 1).frame(width: 30, height:46)
-            LottoOrderView(item:$item)
+            LottoOrderNumberButton(selected: $selected, number: 1, lineColor:Color.Order.line).frame(width: 30, height:46)
+            LottoOrderView()
         }
     }
 }
